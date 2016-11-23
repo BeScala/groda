@@ -7,7 +7,7 @@ import scala.util.Random
 /**
   * Created by Rutger Claes <rutger.claes@cegeka.be> on 23/11/16.
   */
-class EmptyRaffleTest extends FlatSpec with Matchers {
+class EmptyRaffle$Test extends FlatSpec with Matchers {
 
   def randomName = Random.nextString( 5 )
 
@@ -21,13 +21,5 @@ class EmptyRaffleTest extends FlatSpec with Matchers {
 
     notEmpty shouldBe a[DraftRaffle]
   }
-
-  it should "be open to new people" in {
-    val empty = EmptyRaffle( randomName, randomPrices )
-    val notEmpty = empty.addPerson( randomName )
-
-    notEmpty shouldBe a[DraftRaffle]
-  }
-
 
 }
