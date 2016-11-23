@@ -10,11 +10,15 @@ sealed trait Raffle {
 
   def name:String
 
+  def people:Set[String]
+
 }
 
 object Raffle {
 
   type Outcome = (String,String)
+
+  type FinishedRaffle = (String,List[Outcome])
 
   def empty( name:String, prizes:List[String] ) = EmptyRaffle( name, prizes )
 
@@ -22,13 +26,15 @@ object Raffle {
 
 case class EmptyRaffle( name:String, prizes:List[String] ) extends Raffle {
 
-  def addPerson( name:String ) = DraftRaffle( name, prizes, Set( name ) )
+  def addPerson( person:String ) = DraftRaffle( name, prizes, Set( person ) )
+
+  override def people = Set.empty
 
 }
 
 case class DraftRaffle( name:String, prizes:List[String], people:Set[String] ) extends Raffle {
 
-  def addPerson( name:String ) = {
+  def addPerson( name:String ): Raffle = {
     val incPeople = people + name
     if (incPeople.size >= prizes.size)
       ReadyToRunRaffle(name, prizes, incPeople)
@@ -50,5 +56,4 @@ case class ReadyToRunRaffle( name:String, prizes:List[String], people:Set[String
 
 }
 
-
-case class FinishedRaffle( name:String, outcome:List[Outcome] ) extends Raffle
+case class FinishedRaffle( name:String, prizes:List[String], people:Set[String], outcome:List[Outcome] ) extends Raffle
