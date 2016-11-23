@@ -18,8 +18,6 @@ object Raffle {
 
   type Outcome = (String,String)
 
-  type FinishedRaffle = (String,List[Outcome])
-
   def empty( name:String, prizes:List[String] ) = EmptyRaffle( name, prizes )
 
 }
