@@ -2,7 +2,9 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-GET     /test   controllers.RaffleController.test
+# An example controller showing a sample home page
+GET     /test                       controllers.RaffleController.test
+GET     /                           controllers.RaffleController.index()
 
 
 # Map static resources from the /public folder to the /assets URL path
