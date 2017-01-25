@@ -8,6 +8,7 @@ import scala.util.Random
   * Created by Rutger Claes <rutger.claes@cegeka.be> on 23/11/16.
   */
 trait RaffleBehavior { this}
+
 class RaffleTest extends FlatSpec with Matchers {
 
   def randomName = Random.nextString( 5 )
@@ -29,7 +30,7 @@ class RaffleTest extends FlatSpec with Matchers {
     val newName = randomName
     val notEmpty = empty.addPerson(newName)
 
-    notEmpty.people shouldBe( empty.people + newName )
+    notEmpty.people shouldBe Set( newName )
   }
 
   it should "preserve name when adding person" in {

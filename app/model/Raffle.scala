@@ -29,7 +29,7 @@ case class EmptyRaffle( name:String, prizes:List[String] ) extends Raffle {
 
 }
 
-trait RaffleWithPeople { this:Raffle =>
+trait RaffleWithPeople extends Raffle {
 
   def people:Set[String]
 
@@ -44,13 +44,13 @@ trait RaffleWithPeople { this:Raffle =>
   def withPeople( people:Set[String] ): RaffleWithPeople
 }
 
-case class DraftRaffle( name:String, prizes:List[String], people:Set[String] ) extends Raffle with RaffleWithPeople {
+case class DraftRaffle( name:String, prizes:List[String], people:Set[String] ) extends RaffleWithPeople {
 
   override def withPeople(people: Set[String]): RaffleWithPeople = copy( people = people )
 
 }
 
-case class ReadyToRunRaffle( name:String, prizes:List[String], people:Set[String] ) extends Raffle with RaffleWithPeople {
+case class ReadyToRunRaffle( name:String, prizes:List[String], people:Set[String] ) extends RaffleWithPeople {
 
   require( prizes.size >= people.size )
 
